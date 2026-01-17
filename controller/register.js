@@ -1,7 +1,9 @@
+import { creatToken } from "../middleware/creatToken.js";
+
 export const register = async (req, res) => {
        const { username, email, password } = req.body;
        const users =[];
-     
+     const token =creatToken(username ,email,password);
        const findUser = users.find((u) => u.email === email);
        if (findUser) {
            return res.status(400).json({
@@ -13,7 +15,8 @@ export const register = async (req, res) => {
        res.status(200).json({
            success: true,
            message: "User registered successfully",
-           user: users
+           user: users,
+           token
        });
        
        
